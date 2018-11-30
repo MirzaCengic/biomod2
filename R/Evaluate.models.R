@@ -76,7 +76,7 @@ evaluate <- function(model, data, stat, as.array=FALSE){
 ##'                   Nb.thresh.test = 100,
 ##'                   Fixed.thresh = NULL)
 ##'
-##' @param Stat either 'ROC', TSS', 'KAPPA', 'ACCURACY', 'BIAS', 'POD', 'FAR',
+##' @param Stat either 'ROC', 'TSS', 'SOERENSEN', 'JACCARD', 'KAPPA', 'ACCURACY', 'BIAS', 'POD', 'FAR',
 ##'         'POFD', 'SR', 'CSI', 'ETS', 'HK', 'HSS', 'OR' or 'ORSS'
 ##' @param Fit vector of fitted values (continuous)
 ##' @param Obs vector of observed values (binary)
@@ -220,6 +220,8 @@ Find.Optim.Stat <- function(Stat = 'TSS',
 getStatOptimValue <- function(stat){
   if(stat == 'TSS') return(1)
   if(stat == 'KAPPA') return(1)
+  if(stat == 'SOERENSEN') return(1)
+  if(stat == 'JACCARD') return(1)
   if(stat == 'PBC') return(1)
   if(stat == 'ACCURACY') return(1)
   if(stat == 'BIAS') return(1)
@@ -266,6 +268,15 @@ function(Misc, stat='TSS')
 
   if(stat=='ACCURACY'){
     return( (hits + correct_negatives) / total)
+  }
+  if (stat == "JACCARD")
+  {
+    return( hits / (misses + hits + false_alarms)) 
+  }
+  
+  if (stat == "SOERENSEN")
+  {
+    return( (2 * hits) / (misses + (2 * hits) + false_alarms)) 
   }
 
   if(stat=='BIAS'){

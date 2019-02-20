@@ -359,9 +359,9 @@ BIOMOD_Modeling <- function( data,
   # Models evaluation method checking
   models.eval.meth <- unique(models.eval.meth)
 
-  if(sum(models.eval.meth %in% c('FAR','SR','HSS','ORSS','TSS','KAPPA','ACCURACY','BIAS',
+  if(sum(models.eval.meth %in% c('FAR','SR', "SOERENSEN", "JACCARD",'HSS','ORSS','TSS','KAPPA','ACCURACY','BIAS',
                               'POD','PODFD','CSI','ETS','HK','ROC')) != length(models.eval.meth)){
-    stop(paste(models.eval.meth[which( (models.eval.meth %in% c('FAR','SR','HSS','ORSS','TSS',
+    stop(paste(models.eval.meth[which( (models.eval.meth %in% c('FAR',"SOERENSEN", "JACCARD",'SR','HSS','ORSS','TSS',
                                                                 'KAPPA','ACCURACY','BIAS', 'POD',
                                                                 'PODFD','CSI', 'ETS','HK','ROC'))
                                        == FALSE) ]," is not a availabe models evaluation metric !",sep=""))

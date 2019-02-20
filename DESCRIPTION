@@ -1,4 +1,4 @@
-Package: biomod2
+Package: biomod3
 Type: Package
 Title: Ensemble Platform for Species Distribution Modeling
 Version: 3.3-18
@@ -53,4 +53,4 @@ Suggests:
     testthat,
     ecospat
 License: GPL-2
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.0

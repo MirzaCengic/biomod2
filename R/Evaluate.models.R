@@ -257,8 +257,9 @@ function(Misc, stat='TSS')
 
   # Calculating choosen evaluating metric
   if(stat=='TSS'){
-    return( (hits/(hits+misses)) + (correct_negatives/(false_alarms+correct_negatives)) -1 )
-  }
+    
+    return( (hits/(hits+misses)) + (correct_negatives/(false_alarms+correct_negatives)) - 1)
+    }
 
   if(stat=='KAPPA'){
     Po <- (1/total) * (hits + correct_negatives)
@@ -300,8 +301,10 @@ function(Misc, stat='TSS')
   }
 
   if(stat=='CSI'){
-    return(hits/(hits+misses+false_alarms))
-  }
+    # calculate soerensen here instead of TSS
+    soer <- (2 * hits) / (misses + (2 * hits) + false_alarms)
+    return(soer)
+    }
 
   if(stat=='ETS'){
     hits_rand <- ((hits+misses)*(hits+false_alarms)) / total

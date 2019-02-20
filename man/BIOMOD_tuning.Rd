@@ -5,21 +5,21 @@
 \alias{tuning.maxent}
 \title{Tune models parameters}
 \usage{
-tuning.maxent(occ, env = NULL, pres = NULL, bg = NULL, bg.coords = NULL,
-  occ.grp = NULL, bg.grp = NULL, method = NULL, maxent.args, args.lab,
-  categoricals = NULL, aggregation.factor = c(2, 2), kfolds = NA,
-  bin.output = FALSE, clamp, rasterPreds = FALSE, parallel = FALSE,
-  numCores = NULL, RMvalues = seq(0.5, 4, 0.5), fc = c("L", "LQ", "H",
-  "LQH", "LQHP", "LQHPT"))
+tuning.maxent(occ, env = NULL, pres = NULL, bg = NULL,
+  bg.coords = NULL, occ.grp = NULL, bg.grp = NULL, method = NULL,
+  maxent.args, args.lab, categoricals = NULL, aggregation.factor = c(2,
+  2), kfolds = NA, bin.output = FALSE, clamp, rasterPreds = FALSE,
+  parallel = FALSE, numCores = NULL, RMvalues = seq(0.5, 4, 0.5),
+  fc = c("L", "LQ", "H", "LQH", "LQHP", "LQHPT"))
 }
 \arguments{
 \item{data}{BIOMOD.formated.data object returned by BIOMOD_FormatingData}
 
-\item{models}{vector of models names chosen among 'GLM', 'GBM', 'GAM', 'CTA', 'ANN', 'SRE', 'FDA', 'MARS', 'RF', 'MAXENT.Phillips' and 'MAXENT.Tsuruoka'}
+\item{models}{vector of models names choosen among 'GLM', 'GBM', 'GAM', 'CTA', 'ANN', 'SRE', 'FDA', 'MARS', 'RF', 'MAXENT.Phillips' and 'MAXENT.Tsuruoka'}
 
 \item{models.options}{BIOMOD.models.options object returned by BIOMOD_ModelingOptions. Default: BIOMOD_ModelingOptions()}
 
-\item{trControl}{global control parameters for running (default trainControl(method="cv",summaryFunction=twoClassSummary,classProbs=T),returnData = FALSE). for details see trainControl}
+\item{trControl}{global control parameters for runing (default trainControl(method="cv",summaryFunction=twoClassSummary,classProbs=T),returnData = FALSE). for details see trainControl}
 
 \item{ctrl.GAM}{specify control parameters only for GAM (default trControl)}
 
@@ -53,9 +53,9 @@ tuning.maxent(occ, env = NULL, pres = NULL, bg = NULL, bg.coords = NULL,
 
 \item{method.GLM}{which classification or regression model to use for GLM: (default: 'glmStepAIC'). see http://topepo.github.io/caret/Generalized_Linear_Model.html}
 
-\item{type.GLM}{vector of modeling types chosen among 'simple', 'quadratic', 'polynomial' or 's_smoother' (default c('simple','quadratic','polynomial','s_smoother'))}
+\item{type.GLM}{vector of modeling types choosen among 'simple', 'quadratic', 'polynomial' or 's_smoother' (default c('simple','quadratic','polynomial','s_smoother'))}
 
-\item{interaction.GLM}{vector of interaction type chosen among 0, 1. Default c(0,1)}
+\item{interaction.GLM}{vector of interaction type choosen among 0, 1. Default c(0,1)}
 
 \item{cvmethod.ME}{method used for data partitioning for MAXENT.Phillips (default: 'randomkfold')}
 
@@ -69,9 +69,9 @@ tuning.maxent(occ, env = NULL, pres = NULL, bg = NULL, bg.coords = NULL,
 
 \item{env.ME}{RasterStack of model predictor variables}
 
-\item{size.tune.ANN}{size parameters (number of units in the hidden layer) for ANN used for tuning (default: c(2,4,6,8)).  Will be optimized using the method specified in ctrl.ANN (if not available trControl).}
+\item{size.tune.ANN}{size parameters (number of units in the hidden layer) for ANN used for tuning (default: c(2,4,6,8)).  Will be optimised using the method specified in ctrl.ANN (if not available trControl).}
 
-\item{decay.tune.ANN}{weight decay parameters used for tuning for ANN (default: c(0.001, 0.01, 0.05, 0.1))  Will be optimized by method specified in ctrl.ANN (if not available trControl).}
+\item{decay.tune.ANN}{weight decay parameters used for tuning for ANN (default: c(0.001, 0.01, 0.05, 0.1))  Will be optimised by method specified in ctrl.ANN (if not available trControl).}
 
 \item{maxit.ANN}{maximum number of iterations for ANN (default 500)}
 
@@ -97,22 +97,22 @@ head(DataSpecies)
 # the name of studied species
 myRespName <- 'GuloGulo'
 
-# the presence/absences data for our species
+# the presence/absences data for our species 
 myResp <- as.numeric(DataSpecies[,myRespName])
 
 # the XY coordinates of species data
 myRespXY <- DataSpecies[,c("X_WGS84","Y_WGS84")]
 
 # Environmental variables extracted from BIOCLIM (bio_3, bio_4, bio_7, bio_11 & bio_12)
-myExpl = stack( system.file( "external/bioclim/current/bio3.grd",
+myExpl = stack( system.file( "external/bioclim/current/bio3.grd", 
                              package="biomod2"),
-                system.file( "external/bioclim/current/bio4.grd",
-                             package="biomod2"),
-                system.file( "external/bioclim/current/bio7.grd",
-                             package="biomod2"),
-                system.file( "external/bioclim/current/bio11.grd",
-                             package="biomod2"),
-                system.file( "external/bioclim/current/bio12.grd",
+                system.file( "external/bioclim/current/bio4.grd", 
+                             package="biomod2"), 
+                system.file( "external/bioclim/current/bio7.grd", 
+                             package="biomod2"),  
+                system.file( "external/bioclim/current/bio11.grd", 
+                             package="biomod2"), 
+                system.file( "external/bioclim/current/bio12.grd", 
                              package="biomod2"))
 # 1. Formatting Data
 myBiomodData <- BIOMOD_FormatingData(resp.var = myResp,
@@ -121,11 +121,11 @@ myBiomodData <- BIOMOD_FormatingData(resp.var = myResp,
                                      resp.name = myRespName)
 
 # 2. Defining Models Options using default options.
-### Duration for turing all models sequential with default settings
+### Duration for turing all models sequential with default settings 
 ### on 3.4 GHz processor: approx. 45 min tuning all models in parallel
 ### (on 8 cores) using foreach loops runs much faster: approx. 14 min
 
-#library(doParallel);cl<-makeCluster(8);registerDoParallel(cl)
+#library(doParallel);cl<-makeCluster(8);doParallel::registerDoParallel(cl) 
 
 
 time.seq<-system.time(Biomod.tuning <- BIOMOD_tuning(myBiomodData,
@@ -133,12 +133,12 @@ time.seq<-system.time(Biomod.tuning <- BIOMOD_tuning(myBiomodData,
                                                              n.bg.ME = ncell(myExpl)))
 #stopCluster(cl)
 
-myBiomodModelOut <- BIOMOD_Modeling( myBiomodData,
-                                     models = c('RF','CTA'),
-                                     models.options = Biomod.tuning$models.options,
-                                     NbRunEval=1,
-                                     DataSplit=100,
-                                     VarImport=0,
+myBiomodModelOut <- BIOMOD_Modeling( myBiomodData, 
+                                     models = c('RF','CTA'), 
+                                     models.options = Biomod.tuning$models.options, 
+                                     NbRunEval=1, 
+                                     DataSplit=100, 
+                                     VarImport=0, 
                                      models.eval.meth = c('ROC'),
                                      do.full.models=FALSE,
                                      modeling.id="test")
@@ -151,14 +151,14 @@ plot(Biomod.tuning$tune.CTA.rpart2)
 plot(Biomod.tuning$tune.RF)
 }
 }
-\author{
-Frank Breiner
-}
 \references{
-Kuhn, Max. "Building predictive models in R using the caret package." Journal of Statistical Software 28.5 (2008): 1-26.
-Muscarella, Robert, et al. "ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for Maxent ecological niche models." Methods in Ecology and Evolution 5.11 (2014): 1198-1205.
+Kuhn, Max. 2008. Building predictive models in R using the caret package. \emph{Journal of Statistical Software} \bold{28}, 1-26.
+Kuhn, Max, and Kjell Johnson. 2013. Applied predictive modeling. New York: Springer.
+Muscarella, Robert, et al. 2014. ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for Maxent ecological niche models. \emph{Methods in Ecology and Evolution}, \bold{5}, 1198-1205.
 }
 \seealso{
-BIOMOD_ModelingOptions(), caret::train(), ENMeval::ENMevaluate(), maxent::tune.maxent()
+\code{\link[biomod2]{BIOMOD_ModelingOptions}}, \code{\link[caret]{train}}, \code{\link[ENMeval]{ENMevaluate}}, \code{\link[maxent]{tune.maxent}}
 }
-
+\author{
+Frank Breiner \email{frank.breiner@wsl.ch}
+}

@@ -49,7 +49,7 @@
 ##' Kuhn, Max, and Kjell Johnson. 2013. Applied predictive modeling. New York: Springer.
 ##' Muscarella, Robert, et al. 2014. ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for Maxent ecological niche models. \emph{Methods in Ecology and Evolution}, \bold{5}, 1198-1205.
 ##' 
-##' @seealso \code{\link[biomod2]{BIOMOD_ModelingOptions}, \code{\link[caret]{train}, \code{\link[ENMeval]{ENMevaluate}, \code{\link[maxent]{tune.maxent}
+##' @seealso \code{\link[biomod2]{BIOMOD_ModelingOptions}}, \code{\link[caret]{train}}, \code{\link[ENMeval]{ENMevaluate}}, \code{\link[maxent]{tune.maxent}}
 ##' 
 ##' @examples
 ##' \dontrun{

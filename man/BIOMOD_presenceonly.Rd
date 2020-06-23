@@ -16,7 +16,6 @@ BIOMOD_presenceonly(modeling.output = NULL, EM.output = NULL,
 
 \item{perc}{Percentage of correctly classified presences for MPA (Default 90%).}
 
-\item{save.output}{logical. If TRUE (Default) the output is saved to the ".BIOMOD_DATA" folder}
 }
 \value{
 data.frame containing evaluation scores for the evaluation metrics used for 

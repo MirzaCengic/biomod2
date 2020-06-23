@@ -37,7 +37,7 @@ importFrom(rasterVis, levelplot)
 #import("survivial") # for gbm package
 #import("spline") # for gbm package
 #importFrom("gam", s)
-import("maxent")
+#import("maxent")
 ##importFrom("dplyr", "select", "bind_rows", "%>%")
 importFrom("dplyr", "bind_rows", "%>%")
 importFrom("tidyr", "gather")

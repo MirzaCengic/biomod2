@@ -40,7 +40,6 @@ Imports:
     ENMeval,
     doParallel,
     foreach,
-    maxent,
     earth,
     dplyr,
     tidyr
